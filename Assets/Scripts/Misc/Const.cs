@@ -6,5 +6,10 @@
         {
             public const string MOVE = "Move";
         }
+        
+        public struct PlayerAnimation
+        {
+            public const string RUN_ANIMATION = "isMoving";
+        }
     }
 }

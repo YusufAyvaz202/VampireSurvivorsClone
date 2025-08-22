@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Misc;
+using UnityEngine;
 
 namespace Player
 {
@@ -11,6 +12,7 @@ namespace Player
         [Header("Movement Setting")]
         [SerializeField] private float _moveSpeed;
         private Vector3 _moveInput;
+        private Vector3 _lastMoveInput;
         
         [Header("Rotation Settings")]
         private Vector3 _currentLookDirection;
@@ -42,6 +44,8 @@ namespace Player
         {
             Vector3 newPosition = _moveInput * (_moveSpeed * Time.fixedDeltaTime) ;
             _rigidbody2D.MovePosition(transform.position + newPosition);
+            
+            SetPlayerState();
         }
 
         private void RotateFace()
@@ -55,5 +59,23 @@ namespace Player
                 transform.rotation = Quaternion.Euler(_currentLookDirection);
             }
         }
+
+        #region Helper Methods
+
+        private void SetPlayerState()
+        {
+            if (_moveInput == Vector3.zero && _lastMoveInput != _moveInput)
+            {
+                PlayerStateController.Instance.ChangeState(PlayerState.Idle);
+                _lastMoveInput = Vector2.zero;
+            }
+            else if (_moveInput != Vector3.zero && _lastMoveInput != _moveInput)
+            {
+                PlayerStateController.Instance.ChangeState(PlayerState.Running);
+                _lastMoveInput = _moveInput;
+            }
+        }
+
+        #endregion
     }
 }
