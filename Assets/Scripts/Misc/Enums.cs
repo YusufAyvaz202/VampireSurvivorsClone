@@ -5,4 +5,10 @@
         Idle,
         Running,
     }
+    
+    public enum EnemyType
+    {
+        FlyingEye,
+        Goblin,
+    }
 }
