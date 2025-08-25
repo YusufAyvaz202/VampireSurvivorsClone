@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using Interfaces;
+using Managers;
+using Misc;
 using UnityEngine;
 
 namespace Abstract
@@ -8,6 +10,22 @@ namespace Abstract
     {
         [Header("Gun Settings")]
         private float _attackCooldown = 2f;
+        
+        [Header("Game Settings")] 
+        private bool _isPlaying;
+
+        #region Unity Methods
+
+        private void OnEnable()
+        {
+            EventManager.OnGameStateChanged += OnGameStateChanged;
+        }
+
+        private void OnDisable()
+        {
+            EventManager.OnGameStateChanged -= OnGameStateChanged;
+        }
+        #endregion
         
         #region Base Methods
         
@@ -19,6 +37,10 @@ namespace Abstract
         {
             while (true)
             {
+                while (!_isPlaying)
+                {
+                    yield return new WaitForEndOfFrame();
+                }
                 yield return new WaitForSeconds(_attackCooldown);
                 Attack();
             }
@@ -30,6 +52,11 @@ namespace Abstract
         public void StartAttackCooldown()
         {
             StartCoroutine(WaitAttackCooldown());
+        }
+        
+        private void OnGameStateChanged(GameState gameState)
+        {
+            _isPlaying = gameState == GameState.Playing;
         }
 
         #endregion

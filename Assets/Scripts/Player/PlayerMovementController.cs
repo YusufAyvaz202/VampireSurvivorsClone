@@ -1,4 +1,5 @@
-﻿using Misc;
+﻿using Managers;
+using Misc;
 using UnityEngine;
 
 namespace Player
@@ -19,12 +20,20 @@ namespace Player
         private Vector3 _rightRotate = new(0, 0, 0);
         private Vector3 _leftRotate = new(0, 180, 0);
         
+        [Header("Game Settings")]
+        private bool _isPlaying;
+        
         #region Unity Methods
 
         private void Awake()
         {
             _playerInputController = GetComponent<PlayerInputController>();
             _rigidbody2D = GetComponent<Rigidbody2D>();
+        }
+        
+        private void OnEnable()
+        {
+            EventManager.OnGameStateChanged += OnGameStateChanged;
         }
 
         private void Update()
@@ -34,8 +43,15 @@ namespace Player
 
         private void FixedUpdate()
         {
+            if (!_isPlaying) return;
+            
             Move();
             RotateFace();
+        }
+        
+        private void OnDisable()
+        {
+            EventManager.OnGameStateChanged -= OnGameStateChanged;
         }
 
         #endregion
@@ -73,6 +89,16 @@ namespace Player
             {
                 PlayerStateController.Instance.ChangeState(PlayerState.Running);
                 _lastMoveInput = _moveInput;
+            }
+        }
+        
+        private void OnGameStateChanged(GameState gameState)
+        {
+            _isPlaying = gameState == GameState.Playing;
+            if (!_isPlaying)
+            {
+                _moveInput = Vector2.zero;
+                SetPlayerState();
             }
         }
 

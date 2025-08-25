@@ -1,4 +1,6 @@
-﻿using Interfaces;
+﻿using System;
+using Interfaces;
+using Managers;
 using UnityEngine;
 using Misc;
 using UnityEngine.AI;
@@ -7,7 +9,8 @@ namespace Abstract
 {
     public class BaseEnemy : MonoBehaviour, IAttacker, IAttackable
     {
-        [Header("Enemy Settings")] private EnemyType _enemyType;
+        [Header("Enemy Settings")] 
+        private EnemyType _enemyType;
 
         [Header("AI Settings")] 
         [SerializeField] private Transform _target;
@@ -18,6 +21,9 @@ namespace Abstract
         private Vector3 _leftRotate = new(0, 180, 0);
         private Vector3 _faceDirection;
 
+        [Header("Game Settings")] 
+        private bool _isPlaying;
+
         #region Unity Methods
 
         private void Awake()
@@ -25,9 +31,20 @@ namespace Abstract
             SetAISettings();
         }
 
+        private void OnEnable()
+        {
+            EventManager.OnGameStateChanged += OnGameStateChanged;
+        }
+        
         private void FixedUpdate()
         {
+            if (!_isPlaying) return;
             MoveToTarget();
+        }
+        
+        private void OnDisable()
+        {
+            EventManager.OnGameStateChanged -= OnGameStateChanged;
         }
 
         #endregion
@@ -36,7 +53,7 @@ namespace Abstract
 
         public void Attack()
         {
-            throw new System.NotImplementedException();
+            if (!_isPlaying) return;
         }
 
         public void TakeDamage(int damage)
@@ -75,6 +92,20 @@ namespace Abstract
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _navMeshAgent.updateRotation = false;
             _navMeshAgent.updateUpAxis = false;
+        }
+        
+        private void OnGameStateChanged(GameState gameState)
+        {
+            if (gameState == GameState.Playing)
+            {
+                _isPlaying = true;
+                _navMeshAgent.isStopped = false;
+            }
+            else
+            {
+                _isPlaying = false;
+                _navMeshAgent.isStopped = true;
+            }
         }
 
         #endregion

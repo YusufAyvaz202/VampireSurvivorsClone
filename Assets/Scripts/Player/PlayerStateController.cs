@@ -38,7 +38,7 @@ namespace Player
            if (_playerState == newState) return;
            
            _playerState = newState;
-           EventManager.OnPlayerStateChange?.Invoke(_playerState);
+           EventManager.OnPlayerStateChanged?.Invoke(_playerState);
         }
     }
 }

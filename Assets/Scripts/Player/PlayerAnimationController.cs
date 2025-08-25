@@ -18,12 +18,12 @@ namespace Player
 
         private void OnEnable()
         {
-            EventManager.OnPlayerStateChange += OnPlayerStateChange;
+            EventManager.OnPlayerStateChanged += OnPlayerStateChange;
         }
 
         private void OnDisable()
         {
-            EventManager.OnPlayerStateChange -= OnPlayerStateChange;
+            EventManager.OnPlayerStateChanged -= OnPlayerStateChange;
         }
 
         #endregion
