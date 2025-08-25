@@ -10,7 +10,8 @@ namespace Abstract
     {
         [Header("Gun Settings")]
         private float _attackCooldown = 2f;
-        
+        protected const int _attackDamage = 5;
+
         [Header("Game Settings")] 
         private bool _isPlaying;
 

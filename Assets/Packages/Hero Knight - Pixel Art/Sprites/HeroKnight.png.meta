@@ -1068,9 +1068,9 @@ TextureImporter:
       name: HeroKnight_32
       rect:
         serializedVersion: 2
-        x: 200
+        x: 280
         y: 275
-        width: 100
+        width: 20
         height: 55
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -1089,9 +1089,9 @@ TextureImporter:
       name: HeroKnight_33
       rect:
         serializedVersion: 2
-        x: 300
+        x: 384
         y: 275
-        width: 100
+        width: 16
         height: 55
       alignment: 7
       pivot: {x: 0.5, y: 0}

@@ -11,8 +11,9 @@ namespace Abstract
     public class BaseEnemy : MonoBehaviour, IAttacker, IAttackable
     {
         [Header("Enemy Settings")] 
-        private EnemyType _enemyType;
         private HealthController _healthController;
+        private EnemyType _enemyType;
+        private Animator _animator;
 
         [Header("AI Settings")] 
         [SerializeField] private Transform _target;
@@ -80,7 +81,7 @@ namespace Abstract
         
         private void CheckTriggerExits(Collider2D other)
         {
-            if (other.TryGetComponent(out IAttackable attackable))
+            if (other.TryGetComponent(out IAttackable _))
             {
                 StopCoroutine(_attackCoroutine);
             }
@@ -104,6 +105,7 @@ namespace Abstract
         {
             if (!_isPlaying) return;
             
+            PlayAttackAnimation();
             attackable.TakeDamage(10);
         }
 
@@ -149,6 +151,12 @@ namespace Abstract
         private void InitializeComponents()
         {
             _healthController = GetComponent<HealthController>();
+            _animator = GetComponentInChildren<Animator>();
+        }
+
+        private void PlayAttackAnimation()
+        {
+            _animator.SetTrigger(Const.OtherAnimation.ATTACK_ANIMATION);
         }
         
         private void OnGameStateChanged(GameState gameState)
