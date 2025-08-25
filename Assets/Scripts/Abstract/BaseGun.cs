@@ -29,7 +29,7 @@ namespace Abstract
         
         #region Base Methods
         
-        public abstract void Attack();
+        public abstract void Attack(IAttackable attackable);
 
         #endregion
         
@@ -42,7 +42,7 @@ namespace Abstract
                     yield return new WaitForEndOfFrame();
                 }
                 yield return new WaitForSeconds(_attackCooldown);
-                Attack();
+                Attack(null);
             }
             // ReSharper disable once IteratorNeverReturns
         }

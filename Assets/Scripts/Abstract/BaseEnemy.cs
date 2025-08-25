@@ -1,4 +1,5 @@
-﻿using GenericControllers;
+﻿using System.Collections;
+using GenericControllers;
 using Interfaces;
 using Managers;
 using UnityEngine;
@@ -16,6 +17,10 @@ namespace Abstract
         [Header("AI Settings")] 
         [SerializeField] private Transform _target;
         private NavMeshAgent _navMeshAgent;
+        
+        [Header("Attack Settings")]
+        private float _attackCooldown = 1f;
+        private Coroutine _attackCoroutine;
         
         [Header("Rotation Settings")]
         private Vector3 _rightRotate = new(0, 0, 0);
@@ -43,7 +48,19 @@ namespace Abstract
             if (!_isPlaying) return;
             MoveToTarget();
         }
-        
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (!_isPlaying) return;
+            CheckTriggerEnters(other);
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (!_isPlaying) return;
+            CheckTriggerExits(other);
+        }
+
         private void OnDisable()
         {
             EventManager.OnGameStateChanged -= OnGameStateChanged;
@@ -53,10 +70,41 @@ namespace Abstract
 
         #region Base Methods
 
-        public void Attack()
+        private void CheckTriggerEnters(Collider2D other)
+        {
+            if (other.TryGetComponent(out IAttackable attackable))
+            {
+                _attackCoroutine = StartCoroutine(StartAttackCooldown(attackable));
+            }
+        }
+        
+        private void CheckTriggerExits(Collider2D other)
+        {
+            if (other.TryGetComponent(out IAttackable attackable))
+            {
+                StopCoroutine(_attackCoroutine);
+            }
+        }
+        
+        private IEnumerator StartAttackCooldown(IAttackable attackable)
+        {
+            while (true)
+            {
+                while (!_isPlaying)
+                {
+                    yield return new WaitForEndOfFrame();
+                }
+                yield return new WaitForSeconds(_attackCooldown);
+                Attack(attackable);
+            }
+            // ReSharper disable once IteratorNeverReturns
+        }
+
+        public void Attack(IAttackable attackable)
         {
             if (!_isPlaying) return;
-            //TODO: Implement attack logic
+            
+            attackable.TakeDamage(10);
         }
 
         public void TakeDamage(int damage)

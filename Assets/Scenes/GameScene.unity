@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 88231922}
   - component: {fileID: 88231923}
   - component: {fileID: 88231925}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -508,6 +508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59baf7b9e5034d13bb9ba3f228f79de9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxHealth: 100
 --- !u!114 &88231927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -535,7 +536,7 @@ GameObject:
   - component: {fileID: 107364169}
   - component: {fileID: 107364170}
   - component: {fileID: 107364166}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Flying Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -551,7 +552,7 @@ Transform:
   m_GameObject: {fileID: 107364163}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -6.91, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -651,6 +652,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59baf7b9e5034d13bb9ba3f228f79de9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxHealth: 25
 --- !u!114 &107364170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -749,7 +751,7 @@ GameObject:
   m_Component:
   - component: {fileID: 195287520}
   - component: {fileID: 195287521}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Axe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -794,7 +796,7 @@ GameObject:
   - component: {fileID: 279920965}
   - component: {fileID: 279920967}
   - component: {fileID: 279920966}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Health Bar Green Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15121,7 +15123,7 @@ GameObject:
   - component: {fileID: 735496531}
   - component: {fileID: 735496530}
   - component: {fileID: 735496532}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15258,7 +15260,7 @@ GameObject:
   - component: {fileID: 1084441998}
   - component: {fileID: 1084442000}
   - component: {fileID: 1084441999}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Health Bar Red Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15924,7 +15926,7 @@ GameObject:
   - component: {fileID: 1379264340}
   - component: {fileID: 1379264342}
   - component: {fileID: 1379264341}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Health Bar Red Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16030,7 +16032,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1582769538}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Guns
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16065,7 +16067,7 @@ GameObject:
   - component: {fileID: 1847077771}
   - component: {fileID: 1847077770}
   - component: {fileID: 1847077769}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16238,7 +16240,7 @@ GameObject:
   - component: {fileID: 2089250089}
   - component: {fileID: 2089250088}
   - component: {fileID: 2089250087}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16340,7 +16342,7 @@ GameObject:
   - component: {fileID: 2090022516}
   - component: {fileID: 2090022518}
   - component: {fileID: 2090022517}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Health Bar Green Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16452,7 +16454,7 @@ GameObject:
   - component: {fileID: 2118118132}
   - component: {fileID: 2118118131}
   - component: {fileID: 2118118133}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}

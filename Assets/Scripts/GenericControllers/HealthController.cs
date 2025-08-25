@@ -10,13 +10,15 @@ namespace GenericControllers
         private HealthUI _healthUI;
         
         [Header("Health Settings")]
-        private float _maxHealth;
+        [SerializeField] private float _maxHealth;
         private float _currentHealth;
 
         #region Unity Methods
 
         private void Awake()
         {
+            _currentHealth = _maxHealth;
+            
             _healthUI = GetComponent<HealthUI>();
             _healthUI.SetMaxHealth(_maxHealth);
         }
@@ -36,6 +38,7 @@ namespace GenericControllers
         private void Die()
         {
             //TODO: Add death logic
+            Debug.Log($"{gameObject.name} died.");
         }
     }
 }

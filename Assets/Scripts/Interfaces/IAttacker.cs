@@ -2,6 +2,6 @@
 {
     public interface IAttacker
     {
-        void Attack();
+        void Attack(IAttackable attackable);
     }
 }
