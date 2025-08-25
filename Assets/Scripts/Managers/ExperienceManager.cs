@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Experiences;
+using ObjectPool;
+using UnityEngine;
 
 namespace Managers
 {
@@ -14,7 +16,9 @@ namespace Managers
         [SerializeField] private int _currentLevel;
 
         [Header("Spawn Settings")] 
-        [SerializeField] private GameObject _experiencePrefab;
+        [SerializeField] private RectTransform _experienceTargetTransform;
+        [SerializeField] private Experience _experiencePrefab;
+        private ExperiencePool _experiencePool;
 
         #region Unity Methods
 
@@ -33,16 +37,19 @@ namespace Managers
         private void Start()
         {
             EventManager.OnMaxExperienceChanged?.Invoke(Mathf.RoundToInt(_experienceCurve.Evaluate(_currentLevel + 1)));
+            _experiencePool = new ExperiencePool(_experiencePrefab, 10);
         }
 
         private void OnEnable()
         {
             EventManager.OnEnemyDied += SpawnExperienceObject;
+            EventManager.OnExperienceCollected += OnExperienceCollected;
         }
 
         private void OnDisable()
         {
             EventManager.OnEnemyDied -= SpawnExperienceObject;
+            EventManager.OnExperienceCollected -= OnExperienceCollected;
         }
 
         #endregion
@@ -69,10 +76,22 @@ namespace Managers
 
         #endregion
 
+        #region Helper Methods
+        
         private void SpawnExperienceObject(Vector3 spawnPosition)
         {
-            var experience = Instantiate(_experiencePrefab);
+            Experience experience = _experiencePool.GetExperience();
+            experience.SetRectTransform(_experienceTargetTransform);
             experience.transform.position = spawnPosition;
         }
+
+        private void OnExperienceCollected(Experience experience)
+        {
+            _experiencePool.ReturnExperienceToPool(experience);
+        }
+        
+
+        #endregion
+        
     }
 }

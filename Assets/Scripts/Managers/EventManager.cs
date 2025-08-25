@@ -1,4 +1,5 @@
 ﻿using System;
+using Experiences;
 using Misc;
 using UnityEngine;
 
@@ -18,5 +19,8 @@ namespace Managers
         
         // Event triggered for enemy actions
         public static Action<Vector3> OnEnemyDied;
+        
+        //Event triggered for experience Colledted
+        public static Action<Experience> OnExperienceCollected;
     }
 }

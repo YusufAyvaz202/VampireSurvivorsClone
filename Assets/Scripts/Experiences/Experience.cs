@@ -1,20 +1,27 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using Managers;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-
-namespace Experience
+namespace Experiences
 {
     public class Experience : MonoBehaviour
     {
         [Header("References")]
         [SerializeField] private RectTransform _experienceBar;
+        private Camera _camera;
         
         [Header("Experience Settings")]
         private int _minExperience = 1;
         private int _maxExperience = 3;
         
         #region Unity Methods
+
+        private void Awake()
+        {
+            _camera = Camera.main;
+        }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
@@ -25,19 +32,27 @@ namespace Experience
 
         private void PlayUIAnimation()
         {
-            if (Camera.main != null)
+            if (_camera != null)
             {
-                var worldPosition = Camera.main.ScreenToWorldPoint(_experienceBar.transform.position);
-                transform.DOMove(worldPosition, 0.5f).OnComplete(AddExperienceToPlayer);
+                var worldPosition = _camera.ScreenToWorldPoint(_experienceBar.transform.position);
+                transform.DOMove(worldPosition, 1f).OnComplete(AddExperienceToPlayer).SetEase(Ease.InCirc);
             }
         }
 
         private void AddExperienceToPlayer()
         {
             ExperienceManager.Instance.AddExperience(Random.Range(_minExperience, _maxExperience));
-            
-            //TODO: Return pool with object pooling.
-            Destroy(gameObject);
+
+            EventManager.OnExperienceCollected(this);
         }
+
+        #region Helper Methods
+
+        public void SetRectTransform(RectTransform rectTransform)
+        {
+            _experienceBar = rectTransform;
+        }
+
+        #endregion
     }
 }
