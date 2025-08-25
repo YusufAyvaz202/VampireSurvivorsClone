@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Enemys;
 using GenericControllers;
 using Interfaces;
 using Managers;
@@ -11,9 +12,9 @@ namespace Abstract
     public class BaseEnemy : MonoBehaviour, IAttacker, IAttackable
     {
         [Header("Enemy Settings")] 
+        private EnemyAnimationController _enemyAnimationController;
         private HealthController _healthController;
         private EnemyType _enemyType;
-        private Animator _animator;
 
         [Header("AI Settings")] 
         [SerializeField] private Transform _target;
@@ -105,7 +106,7 @@ namespace Abstract
         {
             if (!_isPlaying) return;
             
-            PlayAttackAnimation();
+            _enemyAnimationController.PlayAttackAnimation();
             attackable.TakeDamage(10);
         }
 
@@ -151,14 +152,9 @@ namespace Abstract
         private void InitializeComponents()
         {
             _healthController = GetComponent<HealthController>();
-            _animator = GetComponentInChildren<Animator>();
+            _enemyAnimationController = GetComponent<EnemyAnimationController>();
         }
 
-        private void PlayAttackAnimation()
-        {
-            _animator.SetTrigger(Const.OtherAnimation.ATTACK_ANIMATION);
-        }
-        
         private void OnGameStateChanged(GameState gameState)
         {
             if (gameState == GameState.Playing)

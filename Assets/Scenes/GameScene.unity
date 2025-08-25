@@ -534,9 +534,10 @@ GameObject:
   - component: {fileID: 107364171}
   - component: {fileID: 107364168}
   - component: {fileID: 107364167}
+  - component: {fileID: 107364166}
+  - component: {fileID: 107364172}
   - component: {fileID: 107364169}
   - component: {fileID: 107364170}
-  - component: {fileID: 107364166}
   m_Layer: 7
   m_Name: Flying Eye
   m_TagString: Untagged
@@ -694,6 +695,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &107364172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107364163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5aba564c10e4e1b8cdaf70b5e86094e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &119268270
 GameObject:
   m_ObjectHideFlags: 0
@@ -15406,7 +15419,7 @@ SpriteRenderer:
   m_Size: {x: 0.625, y: 1.71875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &881914822
@@ -15487,7 +15500,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2fdccc0d003217448a735ff8785312a0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: be7ea390082f93547ba4be44dbb25ca5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -16153,7 +16166,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2fdccc0d003217448a735ff8785312a0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: be7ea390082f93547ba4be44dbb25ca5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
