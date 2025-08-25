@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace Managers
 {
@@ -27,8 +28,10 @@ namespace Managers
         }
 
         #endregion
-        
-        public void AddExperience(int amount)
+
+        #region Experience Methods
+
+        private void AddExperience(int amount)
         {
             _currentExperience += amount;
             int experienceToNextLevel = Mathf.RoundToInt(_experienceCurve.Evaluate(_currentLevel));
@@ -36,12 +39,27 @@ namespace Managers
             {
                 LevelUp();
             }
+            EventManager.OnExperienceChanged?.Invoke(_currentExperience);
         }
         
         private void LevelUp()
         {
             _currentLevel++;
             _currentExperience = 0;
+            EventManager.OnMaxExperienceChanged?.Invoke(Mathf.RoundToInt(_experienceCurve.Evaluate(_currentLevel)));
+        }
+
+        #endregion
+        
+        // This is just for testing purposes
+        private IEnumerator IncreaseExperienceOverTime()
+        {
+            while (true)
+            {
+                AddExperience(1);
+                yield return new WaitForSeconds(0.1f);
+            }
+            // ReSharper disable once IteratorNeverReturns
         }
     }
 }

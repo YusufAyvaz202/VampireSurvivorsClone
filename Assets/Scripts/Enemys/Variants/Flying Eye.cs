@@ -1,5 +1,4 @@
 ﻿using Abstract;
-using UnityEngine.AI;
 
 namespace Enemys.Variants
 {

@@ -10,5 +10,9 @@ namespace Managers
         
         // Event triggered when the game state changes
         public static Action<GameState> OnGameStateChanged;
+        
+        // Event triggered for UI updates
+        public static Action<int> OnExperienceChanged;
+        public static Action<int> OnMaxExperienceChanged;
     }
 }
