@@ -1,4 +1,4 @@
-﻿using System;
+﻿using GenericControllers;
 using Interfaces;
 using Managers;
 using UnityEngine;
@@ -11,6 +11,7 @@ namespace Abstract
     {
         [Header("Enemy Settings")] 
         private EnemyType _enemyType;
+        private HealthController _healthController;
 
         [Header("AI Settings")] 
         [SerializeField] private Transform _target;
@@ -29,6 +30,7 @@ namespace Abstract
         private void Awake()
         {
             SetAISettings();
+            InitializeComponents();
         }
 
         private void OnEnable()
@@ -54,11 +56,13 @@ namespace Abstract
         public void Attack()
         {
             if (!_isPlaying) return;
+            //TODO: Implement attack logic
         }
 
         public void TakeDamage(int damage)
         {
-            throw new System.NotImplementedException();
+            if (!_isPlaying) return;
+            _healthController.TakeDamage(damage);
         }
 
         #endregion
@@ -92,6 +96,11 @@ namespace Abstract
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _navMeshAgent.updateRotation = false;
             _navMeshAgent.updateUpAxis = false;
+        }
+        
+        private void InitializeComponents()
+        {
+            _healthController = GetComponent<HealthController>();
         }
         
         private void OnGameStateChanged(GameState gameState)
