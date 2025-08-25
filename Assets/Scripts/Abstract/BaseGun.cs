@@ -31,8 +31,6 @@ namespace Abstract
         #region Base Methods
         
         public abstract void Attack(IAttackable attackable);
-
-        #endregion
         
         private IEnumerator WaitAttackCooldown()
         {
@@ -48,6 +46,8 @@ namespace Abstract
             // ReSharper disable once IteratorNeverReturns
         }
 
+        #endregion
+        
         #region Helper Methods
 
         public void StartAttackCooldown()

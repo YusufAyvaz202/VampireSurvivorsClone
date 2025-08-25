@@ -328,13 +328,13 @@ GameObject:
   - component: {fileID: 88231918}
   - component: {fileID: 88231921}
   - component: {fileID: 88231924}
-  - component: {fileID: 88231926}
-  - component: {fileID: 88231927}
-  - component: {fileID: 88231920}
+  - component: {fileID: 88231925}
   - component: {fileID: 88231919}
+  - component: {fileID: 88231928}
+  - component: {fileID: 88231927}
   - component: {fileID: 88231922}
   - component: {fileID: 88231923}
-  - component: {fileID: 88231925}
+  - component: {fileID: 88231920}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -496,19 +496,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _guns:
   - {fileID: 195287521}
---- !u!114 &88231926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 88231917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59baf7b9e5034d13bb9ba3f228f79de9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxHealth: 100
 --- !u!114 &88231927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -522,6 +509,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthBarImage: {fileID: 279920966}
+--- !u!114 &88231928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88231917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c727b1607548238b984b04a2d7f6b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 100
 --- !u!1 &107364163
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,8 +536,8 @@ GameObject:
   - component: {fileID: 107364167}
   - component: {fileID: 107364166}
   - component: {fileID: 107364172}
-  - component: {fileID: 107364169}
   - component: {fileID: 107364170}
+  - component: {fileID: 107364173}
   m_Layer: 7
   m_Name: Flying Eye
   m_TagString: Untagged
@@ -642,19 +642,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.35853282, y: 0.4599742}
   m_EdgeRadius: 0
---- !u!114 &107364169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 107364163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59baf7b9e5034d13bb9ba3f228f79de9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxHealth: 25
 --- !u!114 &107364170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -707,6 +694,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5aba564c10e4e1b8cdaf70b5e86094e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &107364173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107364163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d61397850716467385fa0b215c693920, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 25
 --- !u!1 &119268270
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,10 +1,11 @@
-﻿using UI;
+﻿using Interfaces;
+using UI;
 using UnityEngine;
 
-namespace GenericControllers
+namespace Enemys
 {
     [RequireComponent(typeof(HealthUI))]
-    public class HealthController : MonoBehaviour
+    public class EnemyHealthController : MonoBehaviour, IAttackable
     {
         [Header("References")]
         private HealthUI _healthUI;
@@ -25,7 +26,7 @@ namespace GenericControllers
 
         #endregion
         
-        public void TakeDamage(float damage)
+        public void TakeDamage(int damage)
         {
             _currentHealth -= damage;
             _healthUI.UpdateHealthBar(_currentHealth);
@@ -37,7 +38,7 @@ namespace GenericControllers
 
         private void Die()
         {
-            //TODO: Add death logic
+            //TODO: Add death logic with EventManager and object Pooling.
             Debug.Log($"{gameObject.name} died.");
         }
     }

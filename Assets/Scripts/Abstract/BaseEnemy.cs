@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using Enemys;
-using GenericControllers;
 using Interfaces;
 using Managers;
 using UnityEngine;
@@ -9,11 +8,10 @@ using UnityEngine.AI;
 
 namespace Abstract
 {
-    public class BaseEnemy : MonoBehaviour, IAttacker, IAttackable
+    public class BaseEnemy : MonoBehaviour, IAttacker
     {
         [Header("Enemy Settings")] 
         private EnemyAnimationController _enemyAnimationController;
-        private HealthController _healthController;
         private EnemyType _enemyType;
 
         [Header("AI Settings")] 
@@ -110,12 +108,6 @@ namespace Abstract
             attackable.TakeDamage(10);
         }
 
-        public void TakeDamage(int damage)
-        {
-            if (!_isPlaying) return;
-            _healthController.TakeDamage(damage);
-        }
-
         #endregion
 
         #region Movement Methods
@@ -151,7 +143,6 @@ namespace Abstract
         
         private void InitializeComponents()
         {
-            _healthController = GetComponent<HealthController>();
             _enemyAnimationController = GetComponent<EnemyAnimationController>();
         }
 
