@@ -1,5 +1,6 @@
 ﻿using System;
 using Misc;
+using UnityEngine;
 
 namespace Managers
 {
@@ -14,5 +15,8 @@ namespace Managers
         // Event triggered for UI updates
         public static Action<int> OnExperienceChanged;
         public static Action<int> OnMaxExperienceChanged;
+        
+        // Event triggered for enemy actions
+        public static Action<Vector3> OnEnemyDied;
     }
 }

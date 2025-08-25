@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Managers
 {
@@ -11,7 +10,11 @@ namespace Managers
         [Header("Experience Settings")]
         [SerializeField] private AnimationCurve _experienceCurve;
         [SerializeField] private int _currentExperience;
+        [SerializeField] private int _experienceToNextLevel;
         [SerializeField] private int _currentLevel;
+
+        [Header("Spawn Settings")] 
+        [SerializeField] private GameObject _experiencePrefab;
 
         #region Unity Methods
 
@@ -27,15 +30,30 @@ namespace Managers
             }
         }
 
+        private void Start()
+        {
+            EventManager.OnMaxExperienceChanged?.Invoke(Mathf.RoundToInt(_experienceCurve.Evaluate(_currentLevel + 1)));
+        }
+
+        private void OnEnable()
+        {
+            EventManager.OnEnemyDied += SpawnExperienceObject;
+        }
+
+        private void OnDisable()
+        {
+            EventManager.OnEnemyDied -= SpawnExperienceObject;
+        }
+
         #endregion
 
         #region Experience Methods
 
-        private void AddExperience(int amount)
+        public void AddExperience(int amount)
         {
             _currentExperience += amount;
-            int experienceToNextLevel = Mathf.RoundToInt(_experienceCurve.Evaluate(_currentLevel));
-            if (_currentExperience >= experienceToNextLevel)
+            _experienceToNextLevel = Mathf.RoundToInt(_experienceCurve.Evaluate(_currentLevel + 1));
+            if (_currentExperience >= _experienceToNextLevel)
             {
                 LevelUp();
             }
@@ -46,20 +64,15 @@ namespace Managers
         {
             _currentLevel++;
             _currentExperience = 0;
-            EventManager.OnMaxExperienceChanged?.Invoke(Mathf.RoundToInt(_experienceCurve.Evaluate(_currentLevel)));
+            EventManager.OnMaxExperienceChanged?.Invoke(Mathf.RoundToInt(_experienceCurve.Evaluate(_currentLevel + 1)));
         }
 
         #endregion
-        
-        // This is just for testing purposes
-        private IEnumerator IncreaseExperienceOverTime()
+
+        private void SpawnExperienceObject(Vector3 spawnPosition)
         {
-            while (true)
-            {
-                AddExperience(1);
-                yield return new WaitForSeconds(0.1f);
-            }
-            // ReSharper disable once IteratorNeverReturns
+            var experience = Instantiate(_experiencePrefab);
+            experience.transform.position = spawnPosition;
         }
     }
 }

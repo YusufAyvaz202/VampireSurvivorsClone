@@ -1,4 +1,5 @@
 ﻿using Interfaces;
+using Managers;
 using UI;
 using UnityEngine;
 
@@ -38,8 +39,10 @@ namespace Enemys
 
         private void Die()
         {
-            //TODO: Add death logic with EventManager and object Pooling.
-            Debug.Log($"{gameObject.name} died.");
+            EventManager.OnEnemyDied?.Invoke(transform.position);
+            
+            //TODO: Return pool with object pooling.
+            Destroy(gameObject);
         }
     }
 }
