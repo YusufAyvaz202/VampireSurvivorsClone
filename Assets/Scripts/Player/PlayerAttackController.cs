@@ -13,12 +13,12 @@ namespace Player
 
         private void Start()
         {
-            Attack();
+            StartLastGunCoolDown();
         }
 
         #endregion
         
-        private void Attack()
+        private void StartLastGunCoolDown()
         {
             _guns[^1].StartAttackCooldown();
         }
@@ -28,7 +28,7 @@ namespace Player
         private void AddGun(BaseGun gun)
         {
             _guns.Add(gun);
-            Attack();
+            StartLastGunCoolDown();
         }
 
         #endregion

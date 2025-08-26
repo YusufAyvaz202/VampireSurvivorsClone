@@ -1,4 +1,5 @@
 ﻿using System;
+using Ammo;
 using Experiences;
 using Misc;
 using UnityEngine;
@@ -20,5 +21,8 @@ namespace Managers
         
         // Event triggered for enemy actions
         public static Action<Vector3> OnEnemyDied;
+        
+        // Event triggered for ammo actions
+        public static Action<MagicBall> OnMagicBallAchieve;
     }
 }

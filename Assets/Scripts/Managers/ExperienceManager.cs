@@ -1,5 +1,5 @@
 ﻿using Experiences;
-using ObjectPool;
+using ObjectPooling;
 using UnityEngine;
 
 namespace Managers
@@ -20,7 +20,7 @@ namespace Managers
         [SerializeField] private Transform _experienceParentTransform;
         [SerializeField] private Experience _experiencePrefab;
         [SerializeField] private int _experienceInitialSize;
-        private ExperiencePool _experiencePool;
+        private ObjectPool<Experience> _objectPool;
 
         #region Unity Methods
 
@@ -39,7 +39,7 @@ namespace Managers
         private void Start()
         {
             EventManager.OnMaxExperienceChanged?.Invoke(Mathf.RoundToInt(_experienceCurve.Evaluate(_currentLevel + 1)));
-            _experiencePool = new ExperiencePool(_experiencePrefab, _experienceInitialSize, _experienceParentTransform);
+            _objectPool = new ObjectPool<Experience>(_experiencePrefab, _experienceInitialSize, _experienceParentTransform);
         }
 
         private void OnEnable()
@@ -82,14 +82,14 @@ namespace Managers
         
         private void SpawnExperienceObject(Vector3 spawnPosition)
         {
-            Experience experience = _experiencePool.GetExperience();
+            Experience experience = _objectPool.GetObject();
             experience.SetRectTransform(_experienceTargetTransform);
             experience.transform.position = spawnPosition;
         }
 
         private void OnExperienceCollected(Experience experience)
         {
-            _experiencePool.ReturnExperienceToPool(experience);
+            _objectPool.ReturnToPool(experience);
         }
         
 

@@ -9,15 +9,14 @@ namespace Abstract
     public abstract class BaseGun: MonoBehaviour, IAttacker
     {
         [Header("Gun Settings")]
-        private float _attackCooldown = 2f;
-        protected const int _attackDamage = 5;
+        [SerializeField] private float _attackCooldown;
 
         [Header("Game Settings")] 
         private bool _isPlaying;
 
         #region Unity Methods
 
-        private void OnEnable()
+        private void Awake()
         {
             EventManager.OnGameStateChanged += OnGameStateChanged;
         }

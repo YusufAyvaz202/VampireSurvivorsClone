@@ -8,6 +8,7 @@ namespace Guns
     public class Axe : BaseGun
     {
         [Header("Axe Settings")]
+        private const int _attackDamage = 5;
         private IAttackable _attackable;
         private Animator _animator;
 
