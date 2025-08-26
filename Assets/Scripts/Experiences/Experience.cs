@@ -35,7 +35,7 @@ namespace Experiences
             if (_camera != null)
             {
                 var worldPosition = _camera.ScreenToWorldPoint(_experienceBar.transform.position);
-                transform.DOMove(worldPosition, 1f).OnComplete(AddExperienceToPlayer).SetEase(Ease.InCirc);
+                transform.DOMove(worldPosition, 1f).SetEase(Ease.InCirc).OnComplete(AddExperienceToPlayer);
             }
         }
 

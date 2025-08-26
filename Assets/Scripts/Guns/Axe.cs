@@ -1,17 +1,20 @@
-﻿using Abstract;
+﻿using System.Collections.Generic;
+using Abstract;
 using Interfaces;
 using Misc;
 using UnityEngine;
 
 namespace Guns
 {
+    // it doesn't work right because of list and bool _isAttacking. refactor it later
     public class Axe : BaseGun
     {
         [Header("Axe Settings")]
         private const int _attackDamage = 5;
-        private IAttackable _attackable;
+        private List<IAttackable> _attackableList = new();
         private Animator _animator;
-
+        private bool _isAttacking;
+        
         #region Unity Methods
 
         private void Awake()
@@ -31,13 +34,19 @@ namespace Guns
 
         #endregion
         
-        //TODO: Convert to the area attack with _attackable list.
-        public override void Attack(IAttackable attackable)
+        public override void Attack(IAttackable _)
         {
             PlayAttackAnimation();
             
-            if (_attackable == null) return;
-            _attackable.TakeDamage(_attackDamage);
+            if (_attackableList == null) return;
+
+            _isAttacking = true;
+            foreach (var attackable in _attackableList)
+            {
+                if(attackable == null) continue;
+                attackable.TakeDamage(_attackDamage);
+            }
+            _isAttacking = false;
         }
 
         #region Helper Methods
@@ -54,17 +63,21 @@ namespace Guns
         
         private void SetAttackable(Collider2D other)
         {
+            if (_isAttacking) return;
             if (other.TryGetComponent(out IAttackable attackable))
             {
-                _attackable = attackable;
+                if (_attackableList.Contains(attackable)) return;
+                _attackableList.Add(attackable);
             }
         }
         
         private void ResetAttackable(Collider2D other)
         {
-            if (other.TryGetComponent(out IAttackable _))
+            if (_isAttacking) return;
+            if (other.TryGetComponent(out IAttackable attackable))
             {
-                _attackable = null;
+                if (!_attackableList.Contains(attackable)) return;
+                _attackableList.Remove(attackable);
             }
         }
 

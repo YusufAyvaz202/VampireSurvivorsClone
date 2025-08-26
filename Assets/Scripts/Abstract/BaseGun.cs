@@ -12,7 +12,7 @@ namespace Abstract
         [SerializeField] private float _attackCooldown;
 
         [Header("Game Settings")] 
-        private bool _isPlaying;
+        private bool _isPlaying = true;
 
         #region Unity Methods
 

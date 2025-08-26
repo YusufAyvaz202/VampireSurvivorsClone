@@ -37,6 +37,7 @@ namespace Enemys
             _healthUI.UpdateHealthBar(_currentHealth);
             if (_currentHealth <= 0)
             {
+                ResetHealth();
                 Die();
             }
         }
@@ -45,6 +46,12 @@ namespace Enemys
         {
             EventManager.OnEnemyDiePosition?.Invoke(transform.position);
             EventManager.OnEnemyDied?.Invoke(_baseEnemy);
+        }
+
+        private void ResetHealth()
+        {
+            _currentHealth = _maxHealth;
+            _healthUI.UpdateHealthBar(_currentHealth);
         }
     }
 }

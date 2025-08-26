@@ -1,5 +1,6 @@
 ﻿using Interfaces;
 using Managers;
+using Misc;
 using UnityEngine;
 
 namespace Ammo
@@ -13,12 +14,18 @@ namespace Ammo
         [Header("Settings")]
         [SerializeField] private float _movementSpeed = 5f;
         [SerializeField] private int _damage = 25;
+        private bool _isPlaying = true;
         
         #region Unity Methods
 
         private void Awake()
         {
-            _rigidbody2D = GetComponent<Rigidbody2D>();
+            InitializeComponents();
+        }
+        
+        private void OnEnable()
+        {
+            SubscribeToEvents();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -28,7 +35,13 @@ namespace Ammo
 
         private void FixedUpdate()
         {
+            if (!_isPlaying) return;
             MoveToTarget();
+        }
+        
+        private void OnDisable()
+        {
+            UnsubscribeFromEvents();
         }
 
         #endregion
@@ -56,6 +69,26 @@ namespace Ammo
         public void SetTarget(Transform target)
         {
             _targetTransform = target;
+        }
+        
+        private void OnGameStateChanged(GameState gameState)
+        {
+            _isPlaying = gameState == GameState.Playing;
+        }
+        
+        private void InitializeComponents()
+        {
+            _rigidbody2D = GetComponent<Rigidbody2D>();
+        }
+        
+        private void SubscribeToEvents()
+        {
+            EventManager.OnGameStateChanged += OnGameStateChanged;
+        }
+        
+        private void UnsubscribeFromEvents()
+        {
+            EventManager.OnGameStateChanged -= OnGameStateChanged;
         }
 
         #endregion

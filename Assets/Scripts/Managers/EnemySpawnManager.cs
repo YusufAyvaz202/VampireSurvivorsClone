@@ -17,6 +17,8 @@ namespace Managers
         [SerializeField] private List<BaseEnemy> _enemyPrefabs; 
         private Dictionary<EnemyType, ObjectPool<BaseEnemy>> _enemyPools = new();
         private int _initialSpawnCount = 10;
+        private float _spawnRadius = 20f;
+        private float _spawnInterval = 3f;
         private bool _isPlaying = true;
         
         [Header("References")]
@@ -56,8 +58,8 @@ namespace Managers
                     yield return new WaitForEndOfFrame();
                 }
                 
-                SpawnEnemy(EnemyType.FlyingEye, Random.insideUnitCircle * 25f);
-                yield return new WaitForSeconds(2f);
+                SpawnEnemy(EnemyType.FlyingEye, Random.insideUnitCircle * _spawnRadius);
+                yield return new WaitForSeconds(_spawnInterval);
             }
             // ReSharper disable once IteratorNeverReturns
         }
