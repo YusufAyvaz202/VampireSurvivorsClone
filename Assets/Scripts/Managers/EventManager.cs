@@ -1,4 +1,5 @@
 ﻿using System;
+using Abstract;
 using Ammo;
 using Experiences;
 using Misc;
@@ -20,7 +21,8 @@ namespace Managers
         public static Action<int> OnExperienceChanged;
         
         // Event triggered for enemy actions
-        public static Action<Vector3> OnEnemyDied;
+        public static Action<Vector3> OnEnemyDiePosition;
+        public static Action<BaseEnemy> OnEnemyDied;
         
         // Event triggered for ammo actions
         public static Action<MagicBall> OnMagicBallAchieve;

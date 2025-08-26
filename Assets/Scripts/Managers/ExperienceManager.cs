@@ -98,13 +98,13 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            EventManager.OnEnemyDied += SpawnExperienceObject;
+            EventManager.OnEnemyDiePosition += SpawnExperienceObject;
             EventManager.OnExperienceCollected += OnExperienceCollected;
         }
 
         private void UnsubscribeEvents()
         {
-            EventManager.OnEnemyDied -= SpawnExperienceObject;
+            EventManager.OnEnemyDiePosition -= SpawnExperienceObject;
             EventManager.OnExperienceCollected -= OnExperienceCollected;
         }
 

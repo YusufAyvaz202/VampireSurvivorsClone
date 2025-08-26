@@ -1,4 +1,5 @@
-﻿using Interfaces;
+﻿using Abstract;
+using Interfaces;
 using Managers;
 using UI;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace Enemys
     {
         [Header("References")]
         private HealthUI _healthUI;
+        private BaseEnemy _baseEnemy;
         
         [Header("Health Settings")]
         [SerializeField] private float _maxHealth;
@@ -22,6 +24,8 @@ namespace Enemys
             _currentHealth = _maxHealth;
             
             _healthUI = GetComponent<HealthUI>();
+            _baseEnemy = GetComponent<BaseEnemy>();
+            
             _healthUI.SetMaxHealth(_maxHealth);
         }
 
@@ -39,10 +43,8 @@ namespace Enemys
 
         private void Die()
         {
-            EventManager.OnEnemyDied?.Invoke(transform.position);
-            
-            //TODO: Return pool with object pooling.
-            Destroy(gameObject);
+            EventManager.OnEnemyDiePosition?.Invoke(transform.position);
+            EventManager.OnEnemyDied?.Invoke(_baseEnemy);
         }
     }
 }

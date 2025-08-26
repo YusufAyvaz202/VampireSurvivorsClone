@@ -16,6 +16,7 @@ namespace Guns
         
         [Header("Magic Ball Settings")]
         private Transform _magicBallTargetTransform;
+        private int _powerCount = 1;
 
         #region Unity Methods
 
@@ -48,10 +49,13 @@ namespace Guns
         public override void Attack(IAttackable attackable)
         {
             if (_magicBallTargetTransform == null) return;
-            
-            MagicBall magicBall = _objectPool.GetObject();
-            magicBall.transform.position = transform.position;
-            magicBall.SetTarget(_magicBallTargetTransform);
+
+            for (int i = 0; i < _powerCount; i++)
+            {
+                MagicBall magicBall = _objectPool.GetObject();
+                magicBall.transform.position = transform.position;
+                magicBall.SetTarget(_magicBallTargetTransform);
+            }
         }
 
         #region Helper Methods

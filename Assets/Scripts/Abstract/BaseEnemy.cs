@@ -13,6 +13,8 @@ namespace Abstract
         [Header("Enemy Settings")] 
         private EnemyAnimationController _enemyAnimationController;
         private EnemyType _enemyType;
+        
+        public EnemyType EnemyType => _enemyType;
 
         [Header("AI Settings")] 
         [SerializeField] private Transform _target;
@@ -28,7 +30,7 @@ namespace Abstract
         private Vector3 _faceDirection;
 
         [Header("Game Settings")] 
-        private bool _isPlaying;
+        private bool _isPlaying = true;
 
         #region Unity Methods
 
@@ -139,6 +141,11 @@ namespace Abstract
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _navMeshAgent.updateRotation = false;
             _navMeshAgent.updateUpAxis = false;
+        }
+
+        public void SetTarget(Transform target)
+        {
+            _target = target;
         }
         
         private void InitializeComponents()
