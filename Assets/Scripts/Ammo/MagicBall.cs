@@ -14,7 +14,6 @@ namespace Ammo
         [SerializeField] private float _movementSpeed = 5f;
         [SerializeField] private int _damage = 25;
         
-
         #region Unity Methods
 
         private void Awake()

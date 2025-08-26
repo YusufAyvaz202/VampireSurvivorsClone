@@ -19,7 +19,7 @@ namespace Abstract
         private NavMeshAgent _navMeshAgent;
         
         [Header("Attack Settings")]
-        private float _attackCooldown = 1f;
+        [SerializeField] private float _attackCooldown = 1f;
         private Coroutine _attackCoroutine;
         
         [Header("Rotation Settings")]
@@ -40,7 +40,7 @@ namespace Abstract
 
         private void OnEnable()
         {
-            EventManager.OnGameStateChanged += OnGameStateChanged;
+            SubscribeEvents();
         }
         
         private void FixedUpdate()
@@ -63,7 +63,7 @@ namespace Abstract
 
         private void OnDisable()
         {
-            EventManager.OnGameStateChanged -= OnGameStateChanged;
+            UnsubscribeEvents();
         }
 
         #endregion
@@ -144,6 +144,16 @@ namespace Abstract
         private void InitializeComponents()
         {
             _enemyAnimationController = GetComponent<EnemyAnimationController>();
+        }
+
+        private void SubscribeEvents()
+        {
+            EventManager.OnGameStateChanged += OnGameStateChanged;
+        }
+
+        private void UnsubscribeEvents()
+        {
+            EventManager.OnGameStateChanged -= OnGameStateChanged;
         }
 
         private void OnGameStateChanged(GameState gameState)

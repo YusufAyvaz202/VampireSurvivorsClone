@@ -21,18 +21,26 @@ namespace Guns
 
         void OnEnable()
         {
-            _objectPool = new ObjectPool<MagicBall>(_magicBallPrefab, _initialPoolSize);
-            EventManager.OnMagicBallAchieve += MagicBallReturnedToPool;
+            InitializePool();
+            SubscribeToEvents();
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
+        private void OnTriggerStay2D(Collider2D other)
         {
-            _magicBallTargetTransform = other.transform;
+            SetTargetTransform(other.transform);
+        }
+        
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.transform == _magicBallTargetTransform)
+            {
+                SetTargetTransform();
+            }
         }
 
         void OnDisable()
         {
-            EventManager.OnMagicBallAchieve -= MagicBallReturnedToPool;
+            UnsubscribeFromEvents();
         }
 
         #endregion
@@ -40,14 +48,41 @@ namespace Guns
         public override void Attack(IAttackable attackable)
         {
             if (_magicBallTargetTransform == null) return;
+            
             MagicBall magicBall = _objectPool.GetObject();
             magicBall.transform.position = transform.position;
             magicBall.SetTarget(_magicBallTargetTransform);
         }
+
+        #region Helper Methods
         
+        private void SetTargetTransform(Transform target = null)
+        {
+            _magicBallTargetTransform = target;
+        }
+
         private void MagicBallReturnedToPool(MagicBall magicBall)
         {
             _objectPool.ReturnToPool(magicBall);
         }
+        
+        private void InitializePool()
+        {
+            _objectPool = new ObjectPool<MagicBall>(_magicBallPrefab, _initialPoolSize);
+        }
+        
+        private void SubscribeToEvents()
+        {
+            EventManager.OnMagicBallAchieve += MagicBallReturnedToPool;
+        }
+        
+        private void UnsubscribeFromEvents()
+        {
+            EventManager.OnMagicBallAchieve -= MagicBallReturnedToPool;
+        }
+
+        #endregion
+        
+        
     }
 }

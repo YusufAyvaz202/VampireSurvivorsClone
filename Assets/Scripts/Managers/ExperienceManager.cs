@@ -38,20 +38,17 @@ namespace Managers
 
         private void Start()
         {
-            EventManager.OnMaxExperienceChanged?.Invoke(Mathf.RoundToInt(_experienceCurve.Evaluate(_currentLevel + 1)));
-            _objectPool = new ObjectPool<Experience>(_experiencePrefab, _experienceInitialSize, _experienceParentTransform);
+            InitializeSettings();
         }
 
         private void OnEnable()
         {
-            EventManager.OnEnemyDied += SpawnExperienceObject;
-            EventManager.OnExperienceCollected += OnExperienceCollected;
+            SubscribeEvents();
         }
 
         private void OnDisable()
         {
-            EventManager.OnEnemyDied -= SpawnExperienceObject;
-            EventManager.OnExperienceCollected -= OnExperienceCollected;
+            UnsubscribeEvents();
         }
 
         #endregion
@@ -92,8 +89,24 @@ namespace Managers
             _objectPool.ReturnToPool(experience);
         }
         
+        private void InitializeSettings()
+        {
+            EventManager.OnMaxExperienceChanged?.Invoke(Mathf.RoundToInt(_experienceCurve.Evaluate(_currentLevel + 1)));
+            _objectPool = new ObjectPool<Experience>(_experiencePrefab, _experienceInitialSize, _experienceParentTransform);
+        }
+
+        private void SubscribeEvents()
+        {
+            EventManager.OnEnemyDied += SpawnExperienceObject;
+            EventManager.OnExperienceCollected += OnExperienceCollected;
+        }
+
+        private void UnsubscribeEvents()
+        {
+            EventManager.OnEnemyDied -= SpawnExperienceObject;
+            EventManager.OnExperienceCollected -= OnExperienceCollected;
+        }
 
         #endregion
-        
     }
 }

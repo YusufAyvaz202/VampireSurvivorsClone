@@ -18,12 +18,13 @@ namespace Abstract
 
         private void Awake()
         {
-            EventManager.OnGameStateChanged += OnGameStateChanged;
+            SubscribeToEvents();
         }
 
         private void OnDisable()
         {
-            EventManager.OnGameStateChanged -= OnGameStateChanged;
+            UnsubscribeToEvents();
+            StopAllCoroutines();
         }
         #endregion
         
@@ -52,6 +53,16 @@ namespace Abstract
         public void StartAttackCooldown()
         {
             StartCoroutine(WaitAttackCooldown());
+        }
+
+        private void SubscribeToEvents()
+        {
+            EventManager.OnGameStateChanged += OnGameStateChanged;
+        }
+
+        private void UnsubscribeToEvents()
+        {
+            EventManager.OnGameStateChanged -= OnGameStateChanged;
         }
         
         private void OnGameStateChanged(GameState gameState)

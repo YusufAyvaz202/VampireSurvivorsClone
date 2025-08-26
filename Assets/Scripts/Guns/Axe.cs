@@ -16,7 +16,17 @@ namespace Guns
 
         private void Awake()
         {
-            _animator = GetComponentInChildren<Animator>();
+            InitializeComponents();
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            SetAttackable(other);
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            ResetAttackable(other);
         }
 
         #endregion
@@ -24,26 +34,40 @@ namespace Guns
         //TODO: Convert to the area attack with _attackable list.
         public override void Attack(IAttackable attackable)
         {
-            _animator.SetTrigger(Const.OtherAnimation.ATTACK_ANIMATION);
+            PlayAttackAnimation();
             
             if (_attackable == null) return;
             _attackable.TakeDamage(_attackDamage);
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
+        #region Helper Methods
+
+        private void InitializeComponents()
+        {
+            _animator = GetComponentInChildren<Animator>();
+        }
+        
+        private void PlayAttackAnimation()
+        {
+            _animator.SetTrigger(Const.OtherAnimation.ATTACK_ANIMATION);
+        }
+        
+        private void SetAttackable(Collider2D other)
         {
             if (other.TryGetComponent(out IAttackable attackable))
             {
                 _attackable = attackable;
             }
         }
-
-        private void OnTriggerExit2D(Collider2D other)
+        
+        private void ResetAttackable(Collider2D other)
         {
             if (other.TryGetComponent(out IAttackable _))
             {
                 _attackable = null;
             }
         }
+
+        #endregion
     }
 }
