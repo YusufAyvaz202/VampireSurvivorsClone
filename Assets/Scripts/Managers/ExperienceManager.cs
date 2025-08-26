@@ -17,7 +17,9 @@ namespace Managers
 
         [Header("Spawn Settings")] 
         [SerializeField] private RectTransform _experienceTargetTransform;
+        [SerializeField] private Transform _experienceParentTransform;
         [SerializeField] private Experience _experiencePrefab;
+        [SerializeField] private int _experienceInitialSize;
         private ExperiencePool _experiencePool;
 
         #region Unity Methods
@@ -37,7 +39,7 @@ namespace Managers
         private void Start()
         {
             EventManager.OnMaxExperienceChanged?.Invoke(Mathf.RoundToInt(_experienceCurve.Evaluate(_currentLevel + 1)));
-            _experiencePool = new ExperiencePool(_experiencePrefab, 10);
+            _experiencePool = new ExperiencePool(_experiencePrefab, _experienceInitialSize, _experienceParentTransform);
         }
 
         private void OnEnable()

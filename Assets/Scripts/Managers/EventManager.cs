@@ -13,14 +13,12 @@ namespace Managers
         // Event triggered when the game state changes
         public static Action<GameState> OnGameStateChanged;
         
-        // Event triggered for UI updates
-        public static Action<int> OnExperienceChanged;
+        // Event triggered for experience updates
+        public static Action<Experience> OnExperienceCollected;
         public static Action<int> OnMaxExperienceChanged;
+        public static Action<int> OnExperienceChanged;
         
         // Event triggered for enemy actions
         public static Action<Vector3> OnEnemyDied;
-        
-        //Event triggered for experience Colledted
-        public static Action<Experience> OnExperienceCollected;
     }
 }
