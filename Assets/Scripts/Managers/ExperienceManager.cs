@@ -62,6 +62,7 @@ namespace Managers
             if (_currentExperience >= _experienceToNextLevel)
             {
                 LevelUp();
+                EventManager.OnCurrentLevelChanged?.Invoke();
             }
             EventManager.OnExperienceChanged?.Invoke(_currentExperience);
         }

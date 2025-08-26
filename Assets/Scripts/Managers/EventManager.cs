@@ -24,5 +24,8 @@ namespace Managers
         
         // Event triggered for ammo actions
         public static Action<MagicBall> OnMagicBallAchieve;
+
+        // Event triggered for InGameShop and prize actions.
+        public static Action OnCurrentLevelChanged;
     }
 }

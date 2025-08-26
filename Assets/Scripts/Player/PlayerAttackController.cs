@@ -7,6 +7,7 @@ namespace Player
     public class PlayerAttackController : MonoBehaviour
     {
         [Header("References")]
+        [SerializeField] private Transform _gunParentTransform;
         [SerializeField] private List<BaseGun> _guns = new();
 
         #region Unity Methods
@@ -27,6 +28,8 @@ namespace Player
 
         private void AddGun(BaseGun gun)
         {
+            gun.transform.SetParent(_gunParentTransform);
+            
             _guns.Add(gun);
             StartLastGunCoolDown();
         }
