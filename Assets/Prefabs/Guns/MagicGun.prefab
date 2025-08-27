@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackCooldown: 1
+  _attackDamage: 25
   _magicBallPrefab: {fileID: 8840529064638008453, guid: eec9246ae7088534292d30bb198c6166, type: 3}
 --- !u!58 &817222808848616565
 CircleCollider2D:

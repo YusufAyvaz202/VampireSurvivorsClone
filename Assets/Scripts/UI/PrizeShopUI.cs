@@ -1,20 +1,25 @@
 ﻿using DG.Tweening;
 using Managers;
 using Misc;
+using ScriptableObjects;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI
 {
-    public class InGameShopUI : MonoBehaviour
+    public class PrizeShopUI : MonoBehaviour
     {
         [Header("References")] 
         [SerializeField] private GameObject _blackBackgroundObject;
-        [SerializeField] private GameObject _InGameShopPopup;
+        [SerializeField] private GameObject _prizeShopPopup;
+        [SerializeField] private Button _prizeButton1;
+        [SerializeField] private Button _prizeButton2;
+        [SerializeField] private Button _prizeButton3;
 
         [Header("Settings")]
         [SerializeField] private float _animationDuration = 0.3f;
-        private RectTransform _InGameShopPopupTransform;
+        private RectTransform _prizeShopPopupTransform;
         private Image _blackBackgroundImage;
 
         #region Unity Methods
@@ -36,7 +41,19 @@ namespace UI
 
         #endregion
         
-        private void ShowInGameShop()
+        private void ShowPrizeInfo(PrizeDataSO prizeDataSo)
+        {
+            _prizeButton1.GetComponentInChildren<TextMeshProUGUI>().text = prizeDataSo.PrizeDescription;
+            _prizeButton1.onClick.AddListener(() =>CollectPrizes(prizeDataSo));
+        }
+
+        private void CollectPrizes(PrizeDataSO prizeDataSo)
+        {
+            EventManager.OnPrizeCollected?.Invoke(prizeDataSo);
+            ResumeGame();
+        }
+        
+        private void OpenPrizeShop()
         {
             GameManager.Instance.ChangeGameState(GameState.Paused);
             OnGamePause();
@@ -45,10 +62,10 @@ namespace UI
         private void OnGamePause()
         {
             _blackBackgroundObject.SetActive(true);
-            _InGameShopPopup.SetActive(true);
+            _prizeShopPopup.SetActive(true);
 
-            _blackBackgroundImage.DOFade(0.8f, _animationDuration).SetEase(Ease.Linear);
-            _InGameShopPopupTransform.DOScale(1.5f, _animationDuration).SetEase(Ease.OutBack);
+            _blackBackgroundImage.DOFade(0.8f, _animationDuration).SetEase(Ease.Linear).SetUpdate(true);
+            _prizeShopPopupTransform.DOScale(1.5f, _animationDuration).SetEase(Ease.OutBack);
         }
 
         private void ResumeGame()
@@ -60,10 +77,10 @@ namespace UI
         private void OnGameResume()
         {
             _blackBackgroundImage.DOFade(1f, _animationDuration).SetEase(Ease.Linear);
-            _InGameShopPopupTransform.DOScale(1.0f, _animationDuration).SetEase(Ease.OutBack);
+            _prizeShopPopupTransform.DOScale(1.0f, _animationDuration).SetEase(Ease.OutBack);
 
             _blackBackgroundObject.SetActive(false);
-            _InGameShopPopup.SetActive(false);
+            _prizeShopPopup.SetActive(false);
         }
 
         #region Helper Methods
@@ -71,17 +88,19 @@ namespace UI
         private void InitializeComponents()
         {
             _blackBackgroundImage = _blackBackgroundObject.GetComponent<Image>();
-            _InGameShopPopupTransform = _InGameShopPopup.GetComponent<RectTransform>();
+            _prizeShopPopupTransform = _prizeShopPopup.GetComponent<RectTransform>();
         }
 
         private void SubscribeEvents()
         {
-            EventManager.OnCurrentLevelChanged += ShowInGameShop;
+            EventManager.OnCurrentLevelChanged += OpenPrizeShop;
+            EventManager.OnPrizeShowed += ShowPrizeInfo;
         }
 
         private void UnsubscribeEvents()
         {
-            EventManager.OnCurrentLevelChanged -= ShowInGameShop;
+            EventManager.OnCurrentLevelChanged -= OpenPrizeShop;
+            EventManager.OnPrizeShowed -= ShowPrizeInfo;
         }
 
         #endregion

@@ -55,6 +55,7 @@ namespace Guns
                 MagicBall magicBall = _objectPool.GetObject();
                 magicBall.transform.position = transform.position;
                 magicBall.SetTarget(_magicBallTargetTransform);
+                magicBall.SetDamage(_attackDamage);
             }
         }
 

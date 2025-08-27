@@ -10,6 +10,7 @@ namespace Abstract
     {
         [Header("Gun Settings")]
         [SerializeField] private float _attackCooldown;
+        [SerializeField] protected int _attackDamage;
 
         [Header("Game Settings")] 
         private bool _isPlaying;
@@ -53,6 +54,12 @@ namespace Abstract
         public void StartAttackCooldown()
         {
             StartCoroutine(WaitAttackCooldown());
+        }
+        
+        public void IncreaseAttackDamage()
+        {
+            // Increase attack damage by 5%
+            _attackDamage += _attackDamage / 20;
         }
 
         private void SubscribeToEvents()

@@ -13,7 +13,7 @@ namespace Ammo
         
         [Header("Settings")]
         [SerializeField] private float _movementSpeed = 5f;
-        [SerializeField] private int _damage = 25;
+        private int _damage = 25;
         private bool _isPlaying = true;
         
         #region Unity Methods
@@ -69,6 +69,11 @@ namespace Ammo
         public void SetTarget(Transform target)
         {
             _targetTransform = target;
+        }
+        
+        public void SetDamage(int damage)
+        {
+            _damage = damage;
         }
         
         private void OnGameStateChanged(GameState gameState)

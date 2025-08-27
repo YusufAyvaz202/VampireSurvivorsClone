@@ -19,4 +19,11 @@
         Paused,
         GameOver,
     }
+    
+    public enum PrizeType
+    {
+        Gun,
+        Health,
+        Speed,
+    }
 }

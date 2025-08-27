@@ -335,6 +335,7 @@ GameObject:
   - component: {fileID: 88231922}
   - component: {fileID: 88231923}
   - component: {fileID: 88231920}
+  - component: {fileID: 88231929}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -523,6 +524,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 1000
+--- !u!114 &88231929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88231917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84949dbe514c4b5cbfbf00ac345683e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &119268270
 GameObject:
   m_ObjectHideFlags: 0
@@ -15119,7 +15132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 754446357}
   m_Layer: 5
-  m_Name: Add Magic Ball
+  m_Name: Prize Collect 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15336,11 +15349,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1044091432 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1157776913951963590, guid: 22584667a6ac8ee488f707b4551427e5, type: 3}
-  m_PrefabInstance: {fileID: 6131650997163534845}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1048983369
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15415,7 +15423,7 @@ GameObject:
   - component: {fileID: 1082393715}
   - component: {fileID: 1082393714}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15460,7 +15468,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Add mAGIC BALL
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b38532819151f9f4fbcf6cff1e39c9dd, type: 2}
   m_sharedMaterial: {fileID: -4367772220112695888, guid: b38532819151f9f4fbcf6cff1e39c9dd, type: 2}
@@ -15490,7 +15498,7 @@ MonoBehaviour:
   m_fontSize: 24
   m_fontSizeBase: 24
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -15707,7 +15715,7 @@ GameObject:
   - component: {fileID: 1304198403}
   - component: {fileID: 1304198402}
   m_Layer: 5
-  m_Name: Add Magic Ball Button
+  m_Name: Prize Collect 1 Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15731,7 +15739,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 150}
-  m_SizeDelta: {x: 160, y: 100}
+  m_SizeDelta: {x: 320, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1304198402
 MonoBehaviour:
@@ -16452,7 +16460,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 195287520}
-  - {fileID: 1044091432}
   m_Father: {fileID: 88231918}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1755549101
@@ -16540,7 +16547,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1848681977}
   m_Layer: 5
-  m_Name: Shop Popup
+  m_Name: Prize Shop Popup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16578,7 +16585,7 @@ GameObject:
   - component: {fileID: 1865177430}
   - component: {fileID: 1865177431}
   m_Layer: 5
-  m_Name: InGameShopUI
+  m_Name: PrizeShopUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16618,7 +16625,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _blackBackgroundObject: {fileID: 2110842488}
-  _InGameShopPopup: {fileID: 1848681976}
+  _prizeShopPopup: {fileID: 1848681976}
+  _prizeButton1: {fileID: 1304198402}
+  _prizeButton2: {fileID: 0}
+  _prizeButton3: {fileID: 0}
   _animationDuration: 0.3
 --- !u!4 &1924948336 stripped
 Transform:
@@ -16700,6 +16710,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2039668463}
   - component: {fileID: 2039668462}
+  - component: {fileID: 2039668464}
   m_Layer: 0
   m_Name: Experince Manager
   m_TagString: Untagged
@@ -16724,7 +16735,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 1
-      value: 15
+      value: 5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -16765,6 +16776,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2039668464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039668461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3b294fc75a641b28ac00665445f5165, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prizes:
+  - {fileID: 11400000, guid: 45bbd3b5a69d0f74d94a875827f263cc, type: 2}
+  _collectedPrized: []
 --- !u!1 &2089250085
 GameObject:
   m_ObjectHideFlags: 0
@@ -17133,63 +17159,6 @@ MonoBehaviour:
   _enemyPrefabs:
   - {fileID: 2464932458475458985, guid: 76668f1dcd8dc6d489abf72f4cf91061, type: 3}
   _playerTransform: {fileID: 88231918}
---- !u!1001 &6131650997163534845
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1582769538}
-    m_Modifications:
-    - target: {fileID: 1157776913951963590, guid: 22584667a6ac8ee488f707b4551427e5, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1157776913951963590, guid: 22584667a6ac8ee488f707b4551427e5, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1157776913951963590, guid: 22584667a6ac8ee488f707b4551427e5, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1157776913951963590, guid: 22584667a6ac8ee488f707b4551427e5, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1157776913951963590, guid: 22584667a6ac8ee488f707b4551427e5, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1157776913951963590, guid: 22584667a6ac8ee488f707b4551427e5, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1157776913951963590, guid: 22584667a6ac8ee488f707b4551427e5, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1157776913951963590, guid: 22584667a6ac8ee488f707b4551427e5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1157776913951963590, guid: 22584667a6ac8ee488f707b4551427e5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1157776913951963590, guid: 22584667a6ac8ee488f707b4551427e5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5486858142784219027, guid: 22584667a6ac8ee488f707b4551427e5, type: 3}
-      propertyPath: m_Name
-      value: MagicGun
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 22584667a6ac8ee488f707b4551427e5, type: 3}
 --- !u!1001 &8289269767512874061
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17198,21 +17167,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1582769538}
     m_Modifications:
-    - target: {fileID: 2415858574719071565, guid: 63bd1ade953498944ad4cc12fab05333, type: 3}
-      propertyPath: m_Size.x
-      value: 2.4986718
-      objectReference: {fileID: 0}
-    - target: {fileID: 2415858574719071565, guid: 63bd1ade953498944ad4cc12fab05333, type: 3}
-      propertyPath: m_Size.y
-      value: 1.2729412
-      objectReference: {fileID: 0}
-    - target: {fileID: 2415858574719071565, guid: 63bd1ade953498944ad4cc12fab05333, type: 3}
-      propertyPath: m_Offset.x
-      value: 1.2493359
-      objectReference: {fileID: 0}
-    - target: {fileID: 2415858574719071565, guid: 63bd1ade953498944ad4cc12fab05333, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.24999994
+    - target: {fileID: 2913076084781647333, guid: 63bd1ade953498944ad4cc12fab05333, type: 3}
+      propertyPath: _attackDamage
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 5928146932153437024, guid: 63bd1ade953498944ad4cc12fab05333, type: 3}
       propertyPath: m_Name

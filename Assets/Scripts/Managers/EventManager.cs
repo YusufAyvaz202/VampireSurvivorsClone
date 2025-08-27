@@ -3,6 +3,7 @@ using Abstract;
 using Ammo;
 using Experiences;
 using Misc;
+using ScriptableObjects;
 using UnityEngine;
 
 namespace Managers
@@ -29,5 +30,7 @@ namespace Managers
 
         // Event triggered for InGameShop and prize actions.
         public static Action OnCurrentLevelChanged;
+        public static Action<PrizeDataSO> OnPrizeCollected;
+        public static Action<PrizeDataSO> OnPrizeShowed;
     }
 }

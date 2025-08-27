@@ -26,11 +26,25 @@ namespace Player
         
         #region Helper Methods
 
-        private void AddGun(BaseGun gun)
+        public void CollectGun(BaseGun gun)
         {
-            gun.transform.SetParent(_gunParentTransform);
+            foreach (var existingGun in _guns)
+            {
+                if (existingGun.GetType() == gun.GetType())
+                {
+                    existingGun.IncreaseAttackDamage();
+                    Debug.Log($"Improved gun: {existingGun.GetType().Name}");
+                    return;
+                }
+            }
             
-            _guns.Add(gun);
+            Debug.Log("Adding new gun...");
+            var newGun = Instantiate(gun, _gunParentTransform);
+            newGun.transform.localPosition = Vector3.zero;
+            newGun.transform.localRotation = Quaternion.identity;
+            newGun.transform.localScale = Vector3.one;
+
+            _guns.Add(newGun);
             StartLastGunCoolDown();
         }
 
