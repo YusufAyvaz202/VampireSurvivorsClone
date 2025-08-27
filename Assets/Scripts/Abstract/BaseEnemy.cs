@@ -17,11 +17,12 @@ namespace Abstract
         public EnemyType EnemyType => _enemyType;
 
         [Header("AI Settings")] 
-        [SerializeField] private Transform _target;
+        private Transform _target;
         private NavMeshAgent _navMeshAgent;
         
         [Header("Attack Settings")]
         [SerializeField] private float _attackCooldown = 1f;
+        [SerializeField] private int _attackDamage= 10;
         private Coroutine _attackCoroutine;
         
         [Header("Rotation Settings")]
@@ -76,6 +77,7 @@ namespace Abstract
         {
             if (other.TryGetComponent(out IAttackable attackable))
             {
+                if (!isActiveAndEnabled) return;
                 _attackCoroutine = StartCoroutine(StartAttackCooldown(attackable));
             }
         }
@@ -107,7 +109,7 @@ namespace Abstract
             if (!_isPlaying) return;
             
             _enemyAnimationController.PlayAttackAnimation();
-            attackable.TakeDamage(10);
+            attackable.TakeDamage(_attackDamage);
         }
 
         #endregion

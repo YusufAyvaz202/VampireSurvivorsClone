@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Abstract;
 using Ammo;
 using Experiences;
@@ -31,6 +32,6 @@ namespace Managers
         // Event triggered for InGameShop and prize actions.
         public static Action OnCurrentLevelChanged;
         public static Action<PrizeDataSO> OnPrizeCollected;
-        public static Action<PrizeDataSO> OnPrizeShowed;
+        public static Action<List<PrizeDataSO>> OnPrizeShowed;
     }
 }

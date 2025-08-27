@@ -14,11 +14,11 @@ namespace Managers
         public static EnemySpawnManager Instance;
         
         [Header("Settings")]
-        [SerializeField] private List<BaseEnemy> _enemyPrefabs; 
         private Dictionary<EnemyType, ObjectPool<BaseEnemy>> _enemyPools = new();
+        [SerializeField] private List<BaseEnemy> _enemyPrefabs; 
+        [SerializeField] private float _spawnInterval = 2f;
         private int _initialSpawnCount = 10;
         private float _spawnRadius = 20f;
-        private float _spawnInterval = 2f;
         private bool _isPlaying = true;
         
         [Header("References")]

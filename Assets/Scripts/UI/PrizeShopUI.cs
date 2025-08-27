@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System.Collections.Generic;
+using DG.Tweening;
 using Managers;
 using Misc;
 using ScriptableObjects;
@@ -10,15 +11,13 @@ namespace UI
 {
     public class PrizeShopUI : MonoBehaviour
     {
-        [Header("References")] 
-        [SerializeField] private GameObject _blackBackgroundObject;
-        [SerializeField] private GameObject _prizeShopPopup;
-        [SerializeField] private Button _prizeButton1;
-        [SerializeField] private Button _prizeButton2;
-        [SerializeField] private Button _prizeButton3;
+        [Header("References")] [SerializeField]
+        private GameObject _blackBackgroundObject;
 
-        [Header("Settings")]
-        [SerializeField] private float _animationDuration = 0.3f;
+        [SerializeField] private GameObject _prizeShopPopup;
+        [SerializeField] private Button[] _prizeButtons = new Button[3];
+
+        [Header("Settings")] [SerializeField] private float _animationDuration = 0.3f;
         private RectTransform _prizeShopPopupTransform;
         private Image _blackBackgroundImage;
 
@@ -40,11 +39,15 @@ namespace UI
         }
 
         #endregion
-        
-        private void ShowPrizeInfo(PrizeDataSO prizeDataSo)
+
+        private void ShowPrizeInfo(List<PrizeDataSO> prizeDataSo)
         {
-            _prizeButton1.GetComponentInChildren<TextMeshProUGUI>().text = prizeDataSo.PrizeDescription;
-            _prizeButton1.onClick.AddListener(() =>CollectPrizes(prizeDataSo));
+            for (int i = 0; i < _prizeButtons.Length; i++)
+            {
+                var prizeData = prizeDataSo[i];
+                _prizeButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = prizeData.PrizeName + " " + prizeData.PrizeDescription;
+                _prizeButtons[i].onClick.AddListener(() => CollectPrizes(prizeData));
+            }
         }
 
         private void CollectPrizes(PrizeDataSO prizeDataSo)
@@ -52,7 +55,7 @@ namespace UI
             EventManager.OnPrizeCollected?.Invoke(prizeDataSo);
             ResumeGame();
         }
-        
+
         private void OpenPrizeShop()
         {
             GameManager.Instance.ChangeGameState(GameState.Paused);

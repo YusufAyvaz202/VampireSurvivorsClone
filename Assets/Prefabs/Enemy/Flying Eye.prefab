@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 6541713152703311168}
   - component: {fileID: 436133866022505189}
   - component: {fileID: 2464932458475458985}
-  - component: {fileID: 3713739013463105602}
   - component: {fileID: 6259147910002862455}
+  - component: {fileID: 3713739013463105602}
   - component: {fileID: 7017247525049782639}
   m_Layer: 7
   m_Name: Flying Eye
@@ -136,21 +136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb5b22d8d11b47648dc029a0185c2e19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 0}
   _attackCooldown: 1
---- !u!114 &3713739013463105602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 117335038396593837}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85509b6bb4ed4e5ebd8ba0bc4ad36b91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _healthBarImage: {fileID: 199576058306983732}
+  _attackDamage: 10
 --- !u!114 &6259147910002862455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,6 +151,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 26
+--- !u!114 &3713739013463105602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117335038396593837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85509b6bb4ed4e5ebd8ba0bc4ad36b91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthBarImage: {fileID: 199576058306983732}
 --- !u!114 &7017247525049782639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -450,7 +450,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6580642390022869522
 RectTransform:
   m_ObjectHideFlags: 0
