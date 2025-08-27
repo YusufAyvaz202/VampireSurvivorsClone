@@ -12,11 +12,11 @@ namespace Abstract
         [SerializeField] private float _attackCooldown;
 
         [Header("Game Settings")] 
-        private bool _isPlaying = true;
+        private bool _isPlaying;
 
         #region Unity Methods
 
-        private void Awake()
+        protected virtual void Awake()
         {
             SubscribeToEvents();
         }

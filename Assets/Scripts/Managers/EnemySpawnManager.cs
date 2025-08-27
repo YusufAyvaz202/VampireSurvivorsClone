@@ -18,7 +18,7 @@ namespace Managers
         private Dictionary<EnemyType, ObjectPool<BaseEnemy>> _enemyPools = new();
         private int _initialSpawnCount = 10;
         private float _spawnRadius = 20f;
-        private float _spawnInterval = 3f;
+        private float _spawnInterval = 2f;
         private bool _isPlaying = true;
         
         [Header("References")]

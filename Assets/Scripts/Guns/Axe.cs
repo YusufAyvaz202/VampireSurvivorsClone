@@ -6,19 +6,19 @@ using UnityEngine;
 
 namespace Guns
 {
-    // it doesn't work right because of list and bool _isAttacking. refactor it later
     public class Axe : BaseGun
     {
-        [Header("Axe Settings")]
+        [Header("Axe Settings")] 
         private const int _attackDamage = 5;
         private List<IAttackable> _attackableList = new();
+        private List<IAttackable> _attackableListCopy = new();
         private Animator _animator;
-        private bool _isAttacking;
-        
+
         #region Unity Methods
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             InitializeComponents();
         }
 
@@ -33,20 +33,18 @@ namespace Guns
         }
 
         #endregion
-        
-        public override void Attack(IAttackable _)
+
+        public override void Attack(IAttackable _attackable)
         {
             PlayAttackAnimation();
-            
-            if (_attackableList == null) return;
+            CopyAttackableList();
+            if (_attackableListCopy == null) return;
 
-            _isAttacking = true;
-            foreach (var attackable in _attackableList)
+            foreach (var attackable in _attackableListCopy)
             {
-                if(attackable == null) continue;
+                if (attackable == null) continue;
                 attackable.TakeDamage(_attackDamage);
             }
-            _isAttacking = false;
         }
 
         #region Helper Methods
@@ -55,30 +53,34 @@ namespace Guns
         {
             _animator = GetComponentInChildren<Animator>();
         }
-        
+
         private void PlayAttackAnimation()
         {
             _animator.SetTrigger(Const.OtherAnimation.ATTACK_ANIMATION);
         }
-        
+
         private void SetAttackable(Collider2D other)
         {
-            if (_isAttacking) return;
             if (other.TryGetComponent(out IAttackable attackable))
             {
                 if (_attackableList.Contains(attackable)) return;
                 _attackableList.Add(attackable);
             }
         }
-        
+
         private void ResetAttackable(Collider2D other)
         {
-            if (_isAttacking) return;
             if (other.TryGetComponent(out IAttackable attackable))
             {
                 if (!_attackableList.Contains(attackable)) return;
                 _attackableList.Remove(attackable);
             }
+        }
+
+        private void CopyAttackableList()
+        {
+            _attackableListCopy.Clear();
+            _attackableListCopy.AddRange(_attackableList);
         }
 
         #endregion
