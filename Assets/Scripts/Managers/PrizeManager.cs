@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using ScriptableObjects;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Managers
 {
@@ -30,13 +31,22 @@ namespace Managers
         
         private void ShowRandomPrize()
         {
-            //TODO Make sure no duplicate prizes are shown
             _prizeDataSo.Clear();
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 100; i++)
             {
                 int randomIndex = Random.Range(0, _prizes.Count);
                 var prize = _prizes[randomIndex];
-            
+
+                if (_prizeDataSo.Contains(prize))
+                {
+                    continue;
+                }
+
+                if (_prizeDataSo.Count > 2)
+                {
+                    break;     
+                }
+
                 prize.PrizeDescription = _collectedPrized.Contains(prize) ? prize.PrizeCollectedDescription : prize.PrizeNotCollectedDescription;
                 _prizeDataSo.Add(prize);
             }

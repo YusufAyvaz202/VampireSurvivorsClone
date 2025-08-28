@@ -17403,6 +17403,7 @@ MonoBehaviour:
   _prizes:
   - {fileID: 11400000, guid: 2cc3443f509fb0d4dbedc6b55d1fea57, type: 2}
   - {fileID: 11400000, guid: 45bbd3b5a69d0f74d94a875827f263cc, type: 2}
+  - {fileID: 11400000, guid: 0562dec34ab5e9d4e965ed4578e7c149, type: 2}
   _collectedPrized:
   - {fileID: 11400000, guid: 2cc3443f509fb0d4dbedc6b55d1fea57, type: 2}
 --- !u!1 &2089250085

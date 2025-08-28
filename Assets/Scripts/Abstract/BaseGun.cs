@@ -9,7 +9,7 @@ namespace Abstract
     public abstract class BaseGun: MonoBehaviour, IAttacker
     {
         [Header("Gun Settings")]
-        [SerializeField] private float _attackCooldown;
+        [SerializeField] protected float _attackCooldown;
         [SerializeField] protected int _attackDamage;
 
         [Header("Game Settings")] 
