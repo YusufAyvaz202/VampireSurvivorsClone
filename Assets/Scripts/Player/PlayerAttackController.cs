@@ -28,16 +28,18 @@ namespace Player
 
         public void CollectGun(BaseGun gun)
         {
+            var incomingGunType = gun.GetGunType();
+
             foreach (var existingGun in _guns)
             {
-                if (existingGun.GetType() == gun.GetType())
+                if (existingGun.GetGunType() == incomingGunType)
                 {
                     existingGun.IncreaseAttackDamage();
                     Debug.Log($"Improved gun: {existingGun.GetType().Name}");
                     return;
                 }
             }
-            
+
             Debug.Log("Adding new gun...");
             var newGun = Instantiate(gun, _gunParentTransform);
             newGun.transform.localPosition = Vector3.zero;

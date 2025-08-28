@@ -45,8 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 601b317303204c8cb54d5e9c0a568d11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gunDataSo: {fileID: 11400000, guid: 61759c1669e74b1479067dca1f99c9e9, type: 2}
   _attackCooldown: 1
   _attackDamage: 25
+  _gunType: 1
   _magicBallPrefab: {fileID: 8840529064638008453, guid: eec9246ae7088534292d30bb198c6166, type: 3}
 --- !u!58 &817222808848616565
 CircleCollider2D:

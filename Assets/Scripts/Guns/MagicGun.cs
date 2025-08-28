@@ -39,8 +39,9 @@ namespace Guns
             }
         }
 
-        void OnDisable()
+        protected override void OnDisable()
         {
+            base.OnDisable();
             UnsubscribeFromEvents();
         }
 

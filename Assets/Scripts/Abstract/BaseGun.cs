@@ -2,6 +2,7 @@
 using Interfaces;
 using Managers;
 using Misc;
+using ScriptableObjects;
 using UnityEngine;
 
 namespace Abstract
@@ -9,8 +10,10 @@ namespace Abstract
     public abstract class BaseGun: MonoBehaviour, IAttacker
     {
         [Header("Gun Settings")]
+        [SerializeField] private GunDataSO _gunDataSo; 
         [SerializeField] protected float _attackCooldown;
         [SerializeField] protected int _attackDamage;
+        [SerializeField] private GunType _gunType;
 
         [Header("Game Settings")] 
         private bool _isPlaying;
@@ -20,9 +23,10 @@ namespace Abstract
         protected virtual void Awake()
         {
             SubscribeToEvents();
+            InitializeData();
         }
 
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
             UnsubscribeToEvents();
             StopAllCoroutines();
@@ -60,6 +64,18 @@ namespace Abstract
         {
             // Increase attack damage by 5%
             _attackDamage += _attackDamage / 20;
+        }
+
+        public GunType GetGunType()
+        {
+            return _gunType;
+        }
+
+        private void InitializeData()
+        {
+            _gunType = _gunDataSo.GunType;
+            _attackCooldown = _gunDataSo.AttackCooldown;
+            _attackDamage = _gunDataSo.AttackDamage;
         }
 
         private void SubscribeToEvents()

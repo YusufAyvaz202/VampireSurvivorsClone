@@ -45,9 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdacb83c05c548b6a2b10e4fd1f52167, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gunDataSo: {fileID: 11400000, guid: d007906d77818ed4bae7462c3eee9653, type: 2}
   _attackCooldown: 2
   _attackDamage: 25
-  _sword: {fileID: 1500487522678894757}
+  _gunType: 2
+  _deactivateDelay: 3
 --- !u!1001 &2836146496358836368
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -105,17 +107,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51e2cfc3b53fcf644847906725065a87, type: 3}
---- !u!114 &1500487522678894757 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3715128043187050549, guid: 51e2cfc3b53fcf644847906725065a87, type: 3}
-  m_PrefabInstance: {fileID: 2836146496358836368}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4486082c54b36841aa07bbe4e94ae83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &4675947627797594653 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7473804541240748685, guid: 51e2cfc3b53fcf644847906725065a87, type: 3}

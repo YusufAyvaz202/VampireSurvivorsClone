@@ -17783,10 +17783,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1582769538}
     m_Modifications:
-    - target: {fileID: 2913076084781647333, guid: 63bd1ade953498944ad4cc12fab05333, type: 3}
-      propertyPath: _attackDamage
-      value: 26
-      objectReference: {fileID: 0}
     - target: {fileID: 5928146932153437024, guid: 63bd1ade953498944ad4cc12fab05333, type: 3}
       propertyPath: m_Name
       value: Axe

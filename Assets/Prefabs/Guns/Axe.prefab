@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45aa104a7f21431e918ec9b10d9a21ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gunDataSo: {fileID: 11400000, guid: b4c0802f1251a5a4d9528d9fffd5ceba, type: 2}
   _attackCooldown: 2
   _attackDamage: 25
 --- !u!61 &2415858574719071565

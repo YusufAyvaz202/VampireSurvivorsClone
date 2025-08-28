@@ -23,8 +23,9 @@ namespace Guns
             InitializeSword();
         }
 
-        private void OnDisable()
+        protected override void  OnDisable()
         {
+            base.OnDisable();
             StopCoroutine();
         }
         
@@ -66,8 +67,8 @@ namespace Guns
             {
                 StopCoroutine(_coroutine);
                 _coroutine = null;
-                _sword.gameObject.SetActive(false);
                 _sword.transform.localPosition = Vector3.zero;
+                _sword.gameObject.SetActive(false);
             }
         }
 

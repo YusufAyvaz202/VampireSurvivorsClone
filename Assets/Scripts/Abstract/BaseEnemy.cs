@@ -84,7 +84,7 @@ namespace Abstract
         
         private void CheckTriggerExits(Collider2D other)
         {
-            if (other.TryGetComponent(out IAttackable _))
+            if (other.TryGetComponent(out IAttackable _) && _attackCoroutine != null)
             {
                 StopCoroutine(_attackCoroutine);
             }

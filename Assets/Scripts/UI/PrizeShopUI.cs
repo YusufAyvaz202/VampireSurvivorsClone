@@ -42,6 +42,11 @@ namespace UI
 
         private void ShowPrizeInfo(List<PrizeDataSO> prizeDataSo)
         {
+            foreach (var _prizeButton in _prizeButtons)
+            {
+                _prizeButton.onClick.RemoveAllListeners();
+            }
+            
             for (int i = 0; i < _prizeButtons.Length; i++)
             {
                 var prizeData = prizeDataSo[i];

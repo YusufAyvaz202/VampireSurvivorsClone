@@ -38,7 +38,6 @@ namespace Managers
             
             _gameState = gameState;
             EventManager.OnGameStateChanged?.Invoke(_gameState);
-            Debug.Log($"GameState changed to {_gameState}");
         }
     }
 }

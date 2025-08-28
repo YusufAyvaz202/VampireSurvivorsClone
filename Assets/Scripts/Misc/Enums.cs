@@ -26,4 +26,11 @@
         Health,
         Speed,
     }
+
+    public enum GunType
+    {
+        Axe,
+        MagicGun,
+        SwordGun
+    }
 }

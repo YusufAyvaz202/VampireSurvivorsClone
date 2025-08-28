@@ -29,10 +29,11 @@ namespace Managers
 
         #endregion
         
+        //TODO: Optimize the code later.
         private void ShowRandomPrize()
         {
             _prizeDataSo.Clear();
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 10; i++)
             {
                 int randomIndex = Random.Range(0, _prizes.Count);
                 var prize = _prizes[randomIndex];
