@@ -27,7 +27,7 @@ namespace Managers
 
         private void Start()
         {
-            ChangeGameState(GameState.Playing);
+            ChangeGameState(GameState.WaitingToStart);
         }
 
         #endregion

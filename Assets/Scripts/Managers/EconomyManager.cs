@@ -43,6 +43,16 @@ namespace Managers
             EventManager.OnCurrentGoldChanged?.Invoke(_collectedGoldCount);
         }
 
+        public bool CanSpend(int spendCost)
+        {
+            if (spendCost <= _totalGoldCount)
+            {
+                _totalGoldCount -= spendCost;
+                return true;
+            }
+            return false;
+        }
+
         private void SaveTotalGoldCount()
         {
             _totalGoldCount += _collectedGoldCount;
@@ -52,6 +62,7 @@ namespace Managers
         private void LoadTotalGoldCount()
         {
             _totalGoldCount = PlayerPrefs.GetInt("TotalGoldCount", _totalGoldCount);
+            EventManager.OnTotalGoldChanged?.Invoke(_totalGoldCount);
         }
         
     }

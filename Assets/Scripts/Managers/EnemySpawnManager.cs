@@ -19,7 +19,7 @@ namespace Managers
         [SerializeField] private float _spawnInterval = 2f;
         private int _initialSpawnCount = 10;
         private float _spawnRadius = 20f;
-        private bool _isPlaying = true;
+        private bool _isPlaying;
         
         [Header("References")]
         [SerializeField] private Transform _playerTransform;
