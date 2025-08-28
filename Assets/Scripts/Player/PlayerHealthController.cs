@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Player
 {
     [RequireComponent(typeof(HealthUI))]
-    public class PlayerHealthController : MonoBehaviour, IAttackable
+    public class PlayerHealthController : MonoBehaviour, IAttackable ,IHealable
     {
         [Header("References")]
         private HealthUI _healthUI;
@@ -41,6 +41,19 @@ namespace Player
         private void Die()
         {
             GameManager.Instance.ChangeGameState(GameState.GameOver);
+        }
+
+        public void Heal(int healAmount)
+        {
+            if (_currentHealth + healAmount > _maxHealth)
+            {
+                _currentHealth = _maxHealth;
+            }
+            else
+            {
+                _currentHealth += healAmount;
+            }
+            _healthUI.UpdateHealthBar(_currentHealth);
         }
     }
 }
