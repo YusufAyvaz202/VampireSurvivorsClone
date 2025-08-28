@@ -40,6 +40,7 @@ namespace Managers
         public void CollectGold(int amount)
         {
             _collectedGoldCount += amount;
+            EventManager.OnCurrentGoldChanged?.Invoke(_collectedGoldCount);
         }
 
         private void SaveTotalGoldCount()

@@ -33,5 +33,8 @@ namespace Managers
         public static Action OnCurrentLevelChanged;
         public static Action<PrizeDataSO> OnPrizeCollected;
         public static Action<List<PrizeDataSO>> OnPrizeShowed;
+        
+        // Event triggered for Economy Actions.
+        public static Action<int> OnCurrentGoldChanged;
     }
 }
