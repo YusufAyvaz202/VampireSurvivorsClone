@@ -12,6 +12,13 @@ namespace Collectible
 
         private void OnTriggerEnter2D(Collider2D other)
         {
+            HealPlayer(other);
+        }
+        
+        #endregion
+        
+        private void HealPlayer(Collider2D other)
+        {
             if (other.TryGetComponent(out IHealable healable))
             {
                 healable.Heal(_healAmount);
@@ -19,7 +26,5 @@ namespace Collectible
             }
         }
 
-        #endregion
-        
     }
 }
