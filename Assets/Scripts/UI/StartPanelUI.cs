@@ -29,11 +29,13 @@ namespace UI
         private void OnEnable()
         {
             EventManager.OnTotalGoldChanged += OnTotalGoldChanged;
+            EventManager.OnGameStateChanged += OnGameStateChanged;
         }
 
         private void OnDisable()
         {
             EventManager.OnTotalGoldChanged -= OnTotalGoldChanged;
+            EventManager.OnGameStateChanged -= OnGameStateChanged;
         }
 
         #endregion
@@ -48,10 +50,20 @@ namespace UI
             _childObject.SetActive(false);
             GameManager.Instance.ChangeGameState(GameState.Playing);
         }
+
+        private void GameOver()
+        {
+            _childObject.SetActive(true);
+        }
         
         private void OnTotalGoldChanged(int totalGold)
         {
             _totalGoldCountText.text = totalGold.ToString();
+        }
+        
+        private void OnGameStateChanged(GameState gameState)
+        {
+            if (gameState == GameState.GameOver) GameOver();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Abstract;
 using Interfaces;
 using Managers;
+using Misc;
 using UI;
 using UnityEngine;
 
@@ -29,6 +30,16 @@ namespace Enemys
             _healthUI.SetMaxHealth(_maxHealth);
         }
 
+        private void OnEnable()
+        {
+            EventManager.OnGameStateChanged += OnGameStateChanged;
+        }
+
+        private void OnDisable()
+        {
+            EventManager.OnGameStateChanged -= OnGameStateChanged;
+        }
+
         #endregion
         
         public void TakeDamage(int damage)
@@ -53,5 +64,18 @@ namespace Enemys
             _currentHealth = _maxHealth;
             _healthUI.UpdateHealthBar(_currentHealth);
         }
+
+        #region Helper Methods
+        
+        private void OnGameStateChanged(GameState gameState)
+        {
+            if (gameState == GameState.GameOver)
+            {
+                ResetHealth();
+                EventManager.OnEnemyDied?.Invoke(_baseEnemy);
+            }
+        }
+
+        #endregion
     }
 }

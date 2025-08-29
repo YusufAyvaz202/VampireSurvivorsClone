@@ -3,6 +3,7 @@ using Managers;
 using Misc;
 using UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Player
 {
@@ -60,7 +61,7 @@ namespace Player
 
         private void Die()
         {
-            GameManager.Instance.ChangeGameState(GameState.GameOver);
+            SceneManager.LoadScene(0);
         }
 
         public void Heal(int healAmount)
@@ -83,6 +84,13 @@ namespace Player
             {
                 _armorPercentage += 0.1f;
             }
+        }
+
+        private void ResetHealth()
+        {
+            _currentHealth = _maxHealth;
+            _healthUI.SetMaxHealth(_maxHealth);
+            _healthUI.UpdateHealthBar(_currentHealth);
         }
     }
 }

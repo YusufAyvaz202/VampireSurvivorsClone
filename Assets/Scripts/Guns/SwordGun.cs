@@ -67,7 +67,6 @@ namespace Guns
             {
                 StopCoroutine(_coroutine);
                 _coroutine = null;
-                _sword.transform.localPosition = Vector3.zero;
                 _sword.gameObject.SetActive(false);
             }
         }

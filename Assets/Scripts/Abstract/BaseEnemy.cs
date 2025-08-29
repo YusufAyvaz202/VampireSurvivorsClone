@@ -43,6 +43,7 @@ namespace Abstract
 
         private void OnEnable()
         {
+            _isPlaying = true;
             SubscribeEvents();
         }
         
@@ -94,12 +95,12 @@ namespace Abstract
         {
             while (true)
             {
+                Attack(attackable);
                 while (!_isPlaying)
                 {
                     yield return new WaitForEndOfFrame();
                 }
                 yield return new WaitForSeconds(_attackCooldown);
-                Attack(attackable);
             }
             // ReSharper disable once IteratorNeverReturns
         }
