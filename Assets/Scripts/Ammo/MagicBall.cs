@@ -14,7 +14,7 @@ namespace Ammo
         [Header("Settings")]
         [SerializeField] private float _movementSpeed = 5f;
         private int _damage = 25;
-        private bool _isPlaying;
+        private bool _isPlaying = true;
         
         #region Unity Methods
 

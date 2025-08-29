@@ -37,5 +37,6 @@ namespace Managers
         // Event triggered for Economy Actions.
         public static Action<int> OnCurrentGoldChanged;
         public static Action<int> OnTotalGoldChanged;
+        public static Action OnAddArmorButtonClicked;
     }
 }

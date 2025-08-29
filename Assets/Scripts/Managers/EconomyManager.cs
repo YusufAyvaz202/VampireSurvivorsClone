@@ -48,6 +48,7 @@ namespace Managers
             if (spendCost <= _totalGoldCount)
             {
                 _totalGoldCount -= spendCost;
+                EventManager.OnTotalGoldChanged?.Invoke(_totalGoldCount);
                 return true;
             }
             return false;

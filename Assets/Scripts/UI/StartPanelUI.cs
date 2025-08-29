@@ -40,7 +40,7 @@ namespace UI
 
         private void AddArmorButtonClicked()
         {
-            //TODO: ADD ARMOR AND SAVE TO JSON WİTH ANOTHER MANAGER
+            EventManager.OnAddArmorButtonClicked?.Invoke();
         }
 
         private void StartButtonClicked()
