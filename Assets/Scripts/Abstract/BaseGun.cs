@@ -62,8 +62,8 @@ namespace Abstract
         
         public void IncreaseAttackDamage()
         {
-            // Increase attack damage by 5%
-            _attackDamage += _attackDamage / 20;
+            // Increase attack damage by percentage defined in constants
+            _attackDamage += Mathf.RoundToInt(_attackDamage * Const.GameBalance.DAMAGE_INCREASE_PERCENTAGE);
         }
 
         public GunType GetGunType()

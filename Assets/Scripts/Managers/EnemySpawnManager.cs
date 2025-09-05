@@ -95,6 +95,13 @@ namespace Managers
         
         private void Initialize()
         {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Instance = this;
+            
             foreach (var enemy in _enemyPrefabs)
             {
                 var pool = new ObjectPool<BaseEnemy>(enemy, _initialSpawnCount, transform);

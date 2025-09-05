@@ -2,7 +2,7 @@
 
 namespace Enemys.Variants
 {
-    public class Flying_Eye : BaseEnemy
+    public class FlyingEye : BaseEnemy
     {
        
     }

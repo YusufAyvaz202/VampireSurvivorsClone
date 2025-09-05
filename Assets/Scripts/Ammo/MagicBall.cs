@@ -49,6 +49,12 @@ namespace Ammo
         // Move the magic ball towards the target
         private void MoveToTarget()
         {
+            if (_targetTransform == null) 
+            {
+                EventManager.OnMagicBallAchieve?.Invoke(this);
+                return;
+            }
+            
             var direction = (_targetTransform.position - transform.position).normalized;
             _rigidbody2D.MovePosition(_rigidbody2D.position + (Vector2)direction * (Time.fixedDeltaTime * _movementSpeed));
         }
