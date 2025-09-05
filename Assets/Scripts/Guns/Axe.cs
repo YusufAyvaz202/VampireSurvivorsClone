@@ -10,7 +10,6 @@ namespace Guns
     {
         [Header("Axe Settings")] 
         private List<IAttackable> _attackableList = new();
-        private List<IAttackable> _attackableListCopy = new();
         private Animator _animator;
 
         #region Unity Methods
@@ -36,13 +35,17 @@ namespace Guns
         public override void Attack(IAttackable _attackable)
         {
             PlayAttackAnimation();
-            CopyAttackableList();
-            if (_attackableListCopy == null) return;
-
-            foreach (var attackable in _attackableListCopy)
+            
+            // Attack enemies directly without creating a copy of the list
+            // Use reverse iteration to safely handle list modifications during iteration
+            for (int i = _attackableList.Count - 1; i >= 0; i--)
             {
-                if (attackable == null) continue;
-                attackable.TakeDamage(_attackDamage);
+                if (_attackableList[i] == null)
+                {
+                    _attackableList.RemoveAt(i);
+                    continue;
+                }
+                _attackableList[i].TakeDamage(_attackDamage);
             }
         }
 
@@ -74,12 +77,6 @@ namespace Guns
                 if (!_attackableList.Contains(attackable)) return;
                 _attackableList.Remove(attackable);
             }
-        }
-
-        private void CopyAttackableList()
-        {
-            _attackableListCopy.Clear();
-            _attackableListCopy.AddRange(_attackableList);
         }
 
         #endregion
